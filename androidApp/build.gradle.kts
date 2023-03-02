@@ -10,9 +10,9 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(project(":shared"))
-                implementation("androidx.appcompat:appcompat:1.6.1")
-                implementation("androidx.activity:activity-compose:1.6.1")
-                implementation("io.github.qdsfdhvh:image-loader:1.2.9")
+                implementation(libs.android.compat)
+                implementation(libs.activity.compose)
+                implementation(libs.image.loader1)
             }
         }
     }
@@ -21,7 +21,7 @@ kotlin {
 android {
     compileSdk = 33
     defaultConfig {
-        applicationId = "com.example.travelapp_kmp.android"
+        applicationId = "dev.shushant.sun_and_storm_kmp.android"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

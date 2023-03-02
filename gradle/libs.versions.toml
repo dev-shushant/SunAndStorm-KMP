@@ -1,0 +1,146 @@
+[versions]
+image-loader = "1.2.9"
+plugin-android = "7.4.2"
+plugin-kotlin = "1.8.0"
+plugin-gver = "0.45.0"
+
+androidx-compose-compiler = "1.4.2"
+androidx-compose = "1.3.1"
+androidx-compose-ui = "1.3.3"
+kotlinx-serialization = "1.4.1"
+kotlinx-coroutines = "1.6.4"
+ktor = "2.2.3"
+napier = "2.6.1"
+multiplatform-settings = "1.0.0"
+voyager = "1.0.0-rc03"
+koin = "3.3.3"
+accompanist = "0.28.0"
+coil = "2.2.2"
+activity-compose = "1.6.1"
+work-runtime-ktx = "2.8.0"
+desugar-jdk-libs = "2.0.2"
+precompose = "1.3.14"
+
+compose-version = "1.4.0-beta02"
+compose-material-version = "1.0.1"
+compose-runtime-version = "1.3.3"
+compose-activity-version = "1.6.1"
+compose-navigation-version = "2.6.0-alpha06"
+
+[libraries]
+image-loader1 = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image-loader" }
+material = { module = "com.google.android.material:material", version = "1.8.0" }
+ktor-client-json-js = { module = "io.ktor:ktor-client-json-js", version.ref = "ktor" }
+plugin-android = { module = "com.android.tools.build:gradle", version.ref = "plugin-android" }
+plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "plugin-kotlin" }
+plugin-kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "plugin-kotlin" }
+plugin-gver = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "plugin-gver" }
+
+androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "androidx-compose-ui" }
+android-compat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
+precompose-moe = { module = "moe.tlaster:precompose", version.ref = "precompose" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidx-compose-ui" }
+androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "androidx-compose" }
+androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "androidx-compose" }
+ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor" }
+ktor-client-json = { module = "io.ktor:ktor-client-json", version.ref = "ktor" }
+ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.4.0" }
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+napier = { module = "io.github.aakira:napier", version.ref = "napier" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatform-settings" }
+multiplatform-settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatform-settings" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-client-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version = "1.6.4" }
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-androidx-compose", version = "3.4.1" }
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
+work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work-runtime-ktx" }
+desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar-jdk-libs" }
+vico-compose-m3 = { module = "com.patrykandpatrick.vico:compose-m3", version = "1.6.3" }
+vico-compose = { module = "com.patrykandpatrick.vico:compose", version = "1.6.3" }
+
+#Compose
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose-version" }
+compose-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose-version" }
+compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-version" }
+compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose-runtime-version" }
+compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose-version" }
+compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material-version" }
+compose-icon = { module = "androidx.compose.material:material-icons-core", version.ref = "compose-version" }
+compose-icon-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-version" }
+compose-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose-version" }
+compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity-version" }
+compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "compose-navigation-version" }
+compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.5.1" }
+compose-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version = "2.6.0-rc01" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+compose-resource = { module = "org.jetbrains.compose.components:components-resources", version = "1.4.0-alpha01-dev947" }
+imageloader = { module = "io.github.qdsfdhvh:image-loader", version = "1.2.8" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.9.0" }
+
+accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
+accompanist-insets-ui = { module = "com.google.accompanist:accompanist-insets-ui", version.ref = "accompanist" }
+accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
+accompanist-indicator = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
+accompanist-permission = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
+accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
+accompanist-systemcontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+accompanist-navigation = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanist" }
+accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
+accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
+
+
+[bundles]
+plugins = ["plugin-android", "plugin-kotlin", "plugin-kotlin-serialization", "plugin-gver"]
+
+
+compose = [
+    "compose-ui",
+    "compose-util",
+    "compose-tooling",
+    "compose-runtime",
+    "compose-foundation",
+    "compose-material3",
+    "compose-icon",
+    "compose-icon-extended",
+    "compose-livedata",
+    "compose-activity",
+    "compose-navigation",
+    "compose-viewmodel",
+    "compose-lifecycle",
+    "coil-compose",
+    "koin-compose"
+]
+
+accompanist = [
+    "accompanist-insets",
+    "accompanist-insets-ui",
+    "accompanist-pager",
+    "accompanist-indicator",
+    "accompanist-permission",
+    "accompanist-placeholder",
+    "accompanist-systemcontroller",
+    "accompanist-navigation",
+    "accompanist-flowlayout",
+    "accompanist-navigation-animation"
+]
+
+vico = [
+    "vico-compose-m3",
+    "vico-compose"
+]

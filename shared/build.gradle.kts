@@ -7,7 +7,6 @@ plugins {
 }
 
 version = "1.0-SNAPSHOT"
-val ktorVersion = extra["ktor.version"]
 
 kotlin {
     android()
@@ -36,38 +35,44 @@ kotlin {
 
     cocoapods {
         summary = "Shared code for the sample"
-        homepage = "https://github.com/SEAbdulbasit/TravelApp-KMP"
+        homepage = "https://github.com/ShushantTiwari-ashu/SunAndStorm-KMP"
         ios.deploymentTarget = "14.1"
         podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
             isStatic = true
         }
-        extraSpecAttributes["resources"] = "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
+        extraSpecAttributes["resources"] =
+            "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
 
     sourceSets {
+        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         val commonMain by getting {
             dependencies {
-                implementation(compose.ui)
+                implementation(libs.ktor.core)
+                implementation(libs.ktor.json)
+                implementation(libs.ktor.client.json)
+                implementation(libs.ktor.client.serialization)
+                implementation(libs.ktor.logging)
+                implementation(libs.ktor.content.negotiation)
+                implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material)
-                implementation(compose.runtime)
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-json:$ktorVersion")
-                implementation("io.ktor:ktor-client-logging:$ktorVersion")
-                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
-                implementation("io.github.qdsfdhvh:image-loader:1.2.9")
+                implementation(compose.material3)
+                implementation(libs.compose.resource)
+                implementation(libs.kotlinx.serialization.json)
+                api(libs.imageloader)
+                implementation(compose.ui)
+                implementation(libs.kotlinx.serialization.json)
 //                api("io.github.qdsfdhvh:image-loader-extension-imageio:1.2.8")
             }
         }
 
         val androidMain by getting {
             dependencies {
-                implementation("com.google.android.material:material:1.7.0")
+                implementation(libs.material)
+                implementation(libs.accompanist.systemcontroller)
             }
         }
         val iosMain by getting
@@ -82,16 +87,16 @@ kotlin {
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.common)
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.6.4")
-                implementation("io.ktor:ktor-client-cio:$ktorVersion")
+                implementation(libs.coroutines.swing)
+                implementation(libs.ktor.client.cio)
             }
         }
 
         val jsMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("io.ktor:ktor-client-js:2.2.1")
-                implementation("io.ktor:ktor-client-json-js:2.1.0")
+                implementation(libs.ktor.client.js)
+                implementation(libs.ktor.client.json)
                 implementation(compose.web.core)
                 implementation(compose.runtime)
             }
@@ -106,12 +111,18 @@ kotlin {
         val macosArm64Main by getting {
             dependsOn(macosMain)
         }
+
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
+        }
     }
 }
 
 android {
     compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    sourceSets["main"].resources.srcDir("src/commonMain/resources")
+    sourceSets["main"].res.srcDirs("src/androidMain/res")
     defaultConfig {
         minSdk = 24
         targetSdk = 33
@@ -120,4 +131,5 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
 }
