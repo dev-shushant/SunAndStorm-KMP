@@ -1,15 +1,18 @@
-import UIKit
+import SwiftUI
 import shared
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate {
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let mainViewController = Main_iosKt.MainViewController()
-        window?.rootViewController = mainViewController
-        window?.makeKeyAndVisible()
-        return true
+            let controller = AvoidDispose(Main_iosKt.MainViewController())
+            controller.view.backgroundColor = .white
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            window.backgroundColor = .white
+            window.rootViewController = controller
+            window.makeKeyAndVisible()
+            self.window = window
+            return true
     }
 }

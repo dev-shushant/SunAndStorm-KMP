@@ -57,15 +57,17 @@ kotlin {
                 implementation(libs.ktor.logging)
                 implementation(libs.ktor.content.negotiation)
                 implementation(compose.runtime)
-                implementation(compose.foundation)
+                api(compose.foundation)
+                api(compose.animation)
                 implementation(compose.material)
                 implementation(compose.material3)
                 implementation(libs.compose.resource)
                 implementation(libs.kotlinx.serialization.json)
                 api(libs.imageloader)
                 implementation(compose.ui)
+                implementation(compose.materialIconsExtended)
                 implementation(libs.kotlinx.serialization.json)
-//                api("io.github.qdsfdhvh:image-loader-extension-imageio:1.2.8")
+                api(libs.precompose.moe)
             }
         }
 
@@ -132,4 +134,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+}
+
+kotlin {
+    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
+        binaries.all {
+            freeCompilerArgs = freeCompilerArgs + "-Xdisable-phases=VerifyBitcode"
+            freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn"
+        }
+    }
 }

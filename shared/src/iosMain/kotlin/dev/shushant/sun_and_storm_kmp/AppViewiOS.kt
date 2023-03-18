@@ -9,7 +9,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.unit.toSize
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.LocalImageLoader
 import com.seiko.imageloader.cache.memory.maxSizePercent
@@ -36,8 +35,7 @@ internal fun AppViewiOS() {
                 }
             },
         ) {
-
-            CommonView(size.value.toSize().width * 0.35.toFloat())
+            SunAndStormApp(false)
         }
     }
 }

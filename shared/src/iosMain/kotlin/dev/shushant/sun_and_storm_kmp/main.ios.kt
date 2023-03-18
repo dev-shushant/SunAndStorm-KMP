@@ -1,16 +1,21 @@
 package dev.shushant.sun_and_storm_kmp
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Application
-import platform.UIKit.UIViewController
+import moe.tlaster.precompose.PreComposeApplication
+import org.jetbrains.skiko.SystemTheme
+import org.jetbrains.skiko.currentSystemTheme
+import platform.CoreGraphics.CGFloat
 
-fun MainViewController(): UIViewController =
-    Application("SunAndStorm-KMP") {
-        AppViewiOS()
-    }
+fun MainViewController() = PreComposeApplication("SunAndStorm-KMP") {
+    AppViewiOS()
+}
+
+fun setSafeArea(start: CGFloat, top: CGFloat, end: CGFloat, bottom: CGFloat) {
+    safeAreaState.value = PaddingValues(start.dp, top.dp, end.dp, bottom.dp)
+    PlatformState.value = Platform.IOS
+}
+
+fun setDarkMode() {
+    darkmodeState.value = currentSystemTheme == SystemTheme.DARK
+}

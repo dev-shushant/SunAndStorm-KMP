@@ -1,23 +1,14 @@
 import androidx.compose.runtime.Composable
-import dev.shushant.sun_and_storm_kmp.CommonView
+import androidx.compose.ui.Modifier
+import dev.shushant.sun_and_storm_kmp.Platform
+import dev.shushant.sun_and_storm_kmp.PlatformState
+import dev.shushant.sun_and_storm_kmp.SunAndStormApp
 
 
 @Composable
 fun MainViewWeb() {
-//    CompositionLocalProvider(
-//        LocalImageLoader provides ImageLoader {
-//            components {
-//                setupDefaultComponents(imageScope)
-//            }
-//            interceptor {
-//                memoryCacheConfig {
-//                    maxSizePercent(0.25)
-//                }
-//            }
-//        },
-//    ) {
-        CommonView(400.toFloat())
- //   }
+    PlatformState.value = Platform.WEB
+    SunAndStormApp(showNavRail = false, modifier = Modifier)
 }
 
 

@@ -1,7 +1,7 @@
 [versions]
 image-loader = "1.2.9"
 plugin-android = "7.4.2"
-plugin-kotlin = "1.8.0"
+plugin-kotlin = "1.8.10"
 plugin-gver = "0.45.0"
 
 androidx-compose-compiler = "1.4.2"
@@ -21,11 +21,11 @@ work-runtime-ktx = "2.8.0"
 desugar-jdk-libs = "2.0.2"
 precompose = "1.3.14"
 
-compose-version = "1.4.0-beta02"
+compose-version = "1.4.0-rc01"
 compose-material-version = "1.0.1"
 compose-runtime-version = "1.3.3"
 compose-activity-version = "1.6.1"
-compose-navigation-version = "2.6.0-alpha06"
+compose-navigation-version = "2.6.0-alpha07"
 
 [libraries]
 image-loader1 = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image-loader" }
@@ -86,11 +86,11 @@ compose-icon-extended = { module = "androidx.compose.material:material-icons-ext
 compose-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose-version" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity-version" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "compose-navigation-version" }
-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.5.1" }
-compose-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version = "2.6.0-rc01" }
+compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.6.0" }
+compose-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version = "2.6.0" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 compose-resource = { module = "org.jetbrains.compose.components:components-resources", version = "1.4.0-alpha01-dev947" }
-imageloader = { module = "io.github.qdsfdhvh:image-loader", version = "1.2.8" }
+imageloader = { module = "io.github.qdsfdhvh:image-loader", version = "1.2.9" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.9.0" }
 
 accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }

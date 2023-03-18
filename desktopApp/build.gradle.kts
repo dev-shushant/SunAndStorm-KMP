@@ -30,7 +30,6 @@ compose.desktop {
 
             windows {
                 menuGroup = "SunAndStorm App KMP"
-                // see https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
                 upgradeUuid = "SunAndStorm-App-KMP"
             }
         }

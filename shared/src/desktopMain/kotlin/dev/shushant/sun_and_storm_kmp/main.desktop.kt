@@ -12,6 +12,7 @@ import com.seiko.imageloader.util.LogPriority
 
 @Composable
 fun AppViewDesktop() {
+    PlatformState.value = Platform.DESKTOP
     CompositionLocalProvider(
         LocalImageLoader provides ImageLoader {
             logger = DebugLogger(LogPriority.VERBOSE)
@@ -25,6 +26,6 @@ fun AppViewDesktop() {
             }
         },
     ) {
-        CommonView(400.toFloat())
+        SunAndStormApp(false)
     }
 }

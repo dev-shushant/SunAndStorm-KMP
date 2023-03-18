@@ -31,7 +31,7 @@ class CountriesApiImpl : CountriesApi {
 
     private fun HttpRequestBuilder.countries(path: String) {
         url {
-            takeFrom("http://192.168.10.3:3000/")
+            takeFrom("http://localhost:3000/")
             encodedPath = path
         }
     }
