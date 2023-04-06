@@ -34,7 +34,7 @@ kotlin {
     }
 
     cocoapods {
-        summary = "Shared code for the sample"
+        summary = "Shared code for SunAndStorm-KMP"
         homepage = "https://github.com/ShushantTiwari-ashu/SunAndStorm-KMP"
         ios.deploymentTarget = "14.1"
         podfile = project.file("../iosApp/Podfile")

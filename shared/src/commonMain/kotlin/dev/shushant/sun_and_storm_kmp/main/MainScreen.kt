@@ -19,10 +19,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
@@ -36,21 +38,23 @@ import dev.shushant.sun_and_storm_kmp.designsystem.SunAndStormIcon
 import dev.shushant.sun_and_storm_kmp.designsystem.SunAndStormIcon.LocationIcon
 import dev.shushant.sun_and_storm_kmp.designsystem.SunAndStormNavRail
 import dev.shushant.sun_and_storm_kmp.designsystem.SunAndStormTopAppBar
+import dev.shushant.sun_and_storm_kmp.designsystem.myiconpack.BlurBackground
 import dev.shushant.sun_and_storm_kmp.designsystem.myiconpack.Hover
-import dev.shushant.sun_and_storm_kmp.screennavigation.TopLevelDestination
+import dev.shushant.sun_and_storm_kmp.screennavigation.Screen
 import dev.shushant.sun_and_storm_kmp.screennavigation.settingsR
 import dev.shushant.sun_and_storm_kmp.style.Dimens.NavigationBarHeight
+import dev.shushant.sun_and_storm_kmp.ui.dashboard.DashboardScreen
 import moe.tlaster.precompose.navigation.NavHost
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-internal fun Dummy() {
+internal fun Dummy(appState: SunAndStormAppState) {
+    Text(appState.currentDestination)
 }
 
 @OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class,
-    ExperimentalResourceApi::class
+    ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class, ExperimentalResourceApi::class
 )
 @Composable
 internal fun MainScreen(
@@ -59,13 +63,13 @@ internal fun MainScreen(
     appState: SunAndStormAppState = rememberSunAndStormAppState(),
 ) {
     val currentPlatform = CurrentPlatform.current.value
-    val shouldShowBottomBar = showNavRail.not()
+    val shouldShowBottomBar = false //showNavRail.not()
 
-    Scaffold(
-        containerColor = Color.Transparent,
+    Scaffold(containerColor = Color.Transparent,
         modifier = modifier,
         contentColor = MaterialTheme.colorScheme.onBackground,
-        contentWindowInsets = WindowInsets(0, 0, 0, 0), bottomBar = {
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+        bottomBar = {
             Box(Modifier.fillMaxWidth()) {
                 if (shouldShowBottomBar) {
                     Image(
@@ -77,9 +81,9 @@ internal fun MainScreen(
                         contentScale = ContentScale.FillBounds
                     )
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter),
                         horizontalArrangement = Arrangement.SpaceEvenly,
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         val iconModifier = when (currentPlatform) {
                             Platform.IOS -> Modifier
@@ -87,89 +91,45 @@ internal fun MainScreen(
                             Platform.WEB -> Modifier
                             Platform.DESKTOP -> Modifier.padding(top = 20.dp)
                         }
-                        Image(
-                            imageVector = LocationIcon,
+                        Image(imageVector = LocationIcon,
                             contentDescription = null,
-                            modifier = iconModifier.clickable { }
-                        )
+                            modifier = iconModifier.clickable {
+                                appState.navigate(Screen.DashBoardScreen.route, true)
+                            })
 
                         Image(
                             painter = painterResource("home.png"),
                             "",
-                            modifier = Modifier.width(250.dp)
-                                .windowInsetsPadding(NavigationBarDefaults.windowInsets)
-                                .clickable { },
+                            modifier = Modifier.width(220.dp)
+                                .windowInsetsPadding(NavigationBarDefaults.windowInsets).clickable {
+                                    appState.navigate(
+                                        Screen.CreateLocationAlertScreen.route, true
+                                    )
+                                },
                             contentScale = ContentScale.Inside
                         )
 
-                        Image(
-                            imageVector = Hover,
+                        Image(imageVector = Hover,
                             contentDescription = null,
-                            modifier = iconModifier.clickable { }
-                        )
+                            modifier = iconModifier.clickable {
+                                appState.navigate(Screen.AllPlacesScreen.route, true)
+                            })
                     }
-
                 }
-                /*if (false) {
-                    NavigationBar(
-                        tonalElevation = 0.dp,
-                        contentColor = SunAndStormNavigationDefaults.navigationContentColor(),
-                        modifier = Modifier.then(if (isIos) Modifier.height(SafeArea.current.value.calculateBottomPadding() + BottomBarHeight) else Modifier)
-                    ) {
-                        TopLevelDestination.values().forEach { screen ->
-                            val selected = appState.isTopLevelDestinationInHierarchy(screen)
-                            NavigationBarItem(
-                                icon = {
-                                    val icon = if (selected) {
-                                        screen.selectedIcon
-                                    } else {
-                                        screen.unselectedIcon
-                                    }
-                                    Icon(
-                                        imageVector = icon.imageVector,
-                                        contentDescription = null,
-                                        modifier = if (isIos) Modifier.size(82.dp) else Modifier
-                                    )
-                                },
-                                label = {
-                                    if (isIos)
-                                        Text(
-                                            screen.iconTextId,
-                                            fontSize = 48.sp,
-                                            modifier = Modifier.padding(bottom = 35.dp + SafeArea.current.value.calculateBottomPadding())
-                                        )
-                                    else
-                                        Text(
-                                            screen.iconTextId
-                                        )
-                                },
-                                selected = appState.currentDestination == screen.toString(),
-                                alwaysShowLabel = true,
-                                onClick = {
-                                    appState.navigateToTopLevelDestination(topLevelDestination = screen)
-                                },
-                            )
-                        }
-                    }
-                }*/
             }
         }) { padding ->
         Row(
-            Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .padding(
-                    top = SafeArea.current.value.calculateTopPadding()
-                )
-                .consumedWindowInsets(padding)
+            Modifier.fillMaxSize().padding(padding).padding(
+                top = SafeArea.current.value.calculateTopPadding()
+            ).consumedWindowInsets(padding)
         ) {
             if (showNavRail) {
                 SunAndStormNavRail(
                     destinations = appState.topLevelDestinations,
                     onNavigateToDestination = appState::navigateToTopLevelDestination,
                     currentDestination = appState.currentDestination,
-                    modifier = Modifier
-                        .testTag("SunAndStormNavRail")
+                    
+                    .
                 )
             }
             Column(Modifier.fillMaxSize()) {
@@ -187,19 +147,19 @@ internal fun MainScreen(
                 }
                 NavHost(
                     navigator = appState.navigator,
-                    initialRoute = TopLevelDestination.values().first().name,
+                    initialRoute = Screen.DashBoardScreen.route,
                 ) {
-                    TopLevelDestination.values().forEach { screen ->
-                        scene(screen.name) {
-                            when (screen.name) {
-                                TopLevelDestination.FOR_YOU.name -> Dummy()
-
-                                TopLevelDestination.BOOKMARKS.name -> Dummy()
-
-                                TopLevelDestination.INTERESTS.name -> Dummy()
-                            }
-                        }
+                    scene(Screen.DashBoardScreen.route) {
+                        DashboardScreen(appState)
                     }
+
+                    scene(Screen.AllPlacesScreen.route) {
+                        Dummy(appState)
+                    }
+                    scene(Screen.CreateLocationAlertScreen.route) {
+                        Dummy(appState)
+                    }
+
                 }
             }
         }

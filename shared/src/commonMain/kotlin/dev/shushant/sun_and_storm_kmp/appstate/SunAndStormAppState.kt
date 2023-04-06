@@ -74,6 +74,21 @@ internal class SunAndStormAppState(
         navigator.navigate(topLevelDestination.name, topLevelNavOptions)
     }
 
+    fun navigate(route: String, popUpTo: Boolean = false) {
+        val navOptions = if (popUpTo) NavOptions(
+            // Pop up to the start destination of the graph to
+            // avoid building up a large stack of destinations
+            // on the back stack as users select items
+            popUpTo = PopUpTo(route),
+            // Avoid multiple copies of the same destination when
+            // reselecting the same item
+            launchSingleTop = true
+            // Restore state when reselecting a previously selected item
+
+        ) else null
+        navigator.navigate(route, navOptions)
+    }
+
     fun setShowSettingsDialog(shouldShow: Boolean) {
         shouldShowSettingsDialog = shouldShow
     }

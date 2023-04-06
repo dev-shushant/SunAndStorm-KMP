@@ -19,11 +19,11 @@ fun AppViewAndroid() {
         // dark icons if we're in light theme
         systemUiController.setSystemBarsColor(
             color = Color.Transparent,
-            darkIcons = false
+            darkIcons = true
         )
         systemUiController.setNavigationBarColor(
             color = Color.Transparent,
-            darkIcons = false
+            darkIcons = true
         )
         onDispose {}
     }

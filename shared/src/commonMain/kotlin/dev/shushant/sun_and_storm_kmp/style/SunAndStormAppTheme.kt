@@ -140,13 +140,13 @@ internal fun SunAndStormAppTheme(
     // Color scheme
     val colorScheme = when {
         androidTheme -> if (darkTheme) DarkAndroidColorScheme else LightAndroidColorScheme
-        else -> DarkDefaultColorScheme
+        else -> if (darkTheme) DarkDefaultColorScheme else LightDefaultColorScheme
     }
     // Gradient colors
     val defaultGradientColors = GradientColors(
         top = colorScheme.inverseOnSurface,
-        bottom = colorScheme.primaryContainer,
-        container = colorScheme.primaryContainer,
+        bottom = Color.White,
+        container = Color.White,
     )
     // Background theme
     val defaultBackgroundTheme = BackgroundTheme(

@@ -1,11 +1,7 @@
 package dev.shushant.sun_and_storm_kmp.screennavigation
 
-import dev.shushant.sun_and_storm_kmp.listing.TouristPlace
-
-sealed interface Screen {
-    object MainScreen : Screen
-    object DashBoardScreen : Screen
-    data class DetailScreen(val touristPlace: TouristPlace) : Screen
+sealed class Screen(val route: String) {
+    object DashBoardScreen : Screen("DashBoardScreen")
+    object AllPlacesScreen : Screen("AllPlacesScreen")
+    object CreateLocationAlertScreen : Screen("CreateLocationAlertScreen")
 }
-
-data class ScreensState(val screen: Screen = Screen.MainScreen)

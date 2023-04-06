@@ -1,8 +1,13 @@
 package dev.shushant.sun_and_storm_kmp.style
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.LocalAbsoluteTonalElevation
+import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -10,13 +15,17 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import kotlin.math.tan
 
 /**
@@ -98,6 +107,7 @@ internal fun SunAndStormGradientBackground(
     }
 }
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun SunAndStormBackground(
     modifier: Modifier = Modifier,
@@ -111,7 +121,15 @@ internal fun SunAndStormBackground(
         modifier = modifier.fillMaxSize(),
     ) {
         CompositionLocalProvider(LocalAbsoluteTonalElevation provides 0.dp) {
-            content()
+            Box{
+                Image(
+                    painter = painterResource("bg.png"),
+                    "",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.FillBounds
+                )
+                content()
+            }
         }
     }
 }
