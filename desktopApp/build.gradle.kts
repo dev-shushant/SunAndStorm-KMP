@@ -3,7 +3,22 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
+    //id("org.openjfx.javafxplugin")
 }
+
+/*javafx {
+    version = "16"
+    modules = arrayOf(
+        "javafx.controls",
+        //"javafx.fxml",
+        "javafx.graphics",
+        //"javafx.web",
+        "javafx.media",
+        "javafx.swing",
+        //"javafx.swt",
+        "javafx.base"
+    ).toMutableList()
+}*/
 
 kotlin {
     jvm {

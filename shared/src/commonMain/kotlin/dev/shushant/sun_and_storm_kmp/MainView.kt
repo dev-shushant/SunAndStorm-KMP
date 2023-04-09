@@ -7,11 +7,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import dev.shushant.sun_and_storm_kmp.designsystem.dimens.DeviceConfiguration
 import dev.shushant.sun_and_storm_kmp.main.MainScreen
-import dev.shushant.sun_and_storm_kmp.style.LocalGradientColors
-import dev.shushant.sun_and_storm_kmp.style.SunAndStormBackground
-import dev.shushant.sun_and_storm_kmp.style.SunAndStormGradientBackground
-import dev.shushant.sun_and_storm_kmp.style.SunAndStormAppTheme
+import dev.shushant.sun_and_storm_kmp.designsystem.style.LocalGradientColors
+import dev.shushant.sun_and_storm_kmp.designsystem.style.SunAndStormAppTheme
+import dev.shushant.sun_and_storm_kmp.designsystem.style.SunAndStormBackground
+import dev.shushant.sun_and_storm_kmp.designsystem.style.SunAndStormGradientBackground
 
 internal val darkmodeState = mutableStateOf(false)
 internal val PlatformState = mutableStateOf(Platform.ANDROID)
@@ -21,13 +22,16 @@ internal val CurrentPlatform = compositionLocalOf { PlatformState }
 internal val DarkMode = compositionLocalOf { darkmodeState }
 
 @Composable
-internal fun SunAndStormApp(showNavRail: Boolean, modifier: Modifier = Modifier) {
+internal fun SunAndStormApp(
+    showNavRail: Boolean,
+    deviceConfiguration: DeviceConfiguration = DeviceConfiguration(),
+    modifier: Modifier = Modifier
+) {
     val darkMode = isSystemInDarkTheme()
-    LaunchedEffect(key1 = Unit, block = {
+    LaunchedEffect(key1 = Unit) {
         darkmodeState.value = darkMode
-    })
-
-    SunAndStormAppTheme {
+    }
+    SunAndStormAppTheme(deviceConfiguration = deviceConfiguration) {
         SunAndStormBackground {
             SunAndStormGradientBackground(
                 gradientColors =

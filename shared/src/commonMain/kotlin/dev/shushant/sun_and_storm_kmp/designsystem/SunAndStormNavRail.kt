@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import dev.shushant.sun_and_storm_kmp.screennavigation.TopLevelDestination
-import dev.shushant.sun_and_storm_kmp.style.SunAndStormNavigationDefaults
+import dev.shushant.sun_and_storm_kmp.designsystem.style.SunAndStormNavigationDefaults
 
 @Composable
 internal fun SunAndStormNavRail(

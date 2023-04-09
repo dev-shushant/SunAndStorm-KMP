@@ -30,6 +30,7 @@ internal class SunAndStormAppState(
     val coroutineScope: CoroutineScope,
     val navigator: Navigator
 ) {
+
     val currentDestination: String
         @Composable get() = navigator.currentEntry.collectAsState(null).value?.route?.route ?: ""
 

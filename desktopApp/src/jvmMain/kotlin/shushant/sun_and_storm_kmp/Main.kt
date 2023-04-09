@@ -7,11 +7,17 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import dev.shushant.sun_and_storm_kmp.AppViewDesktop
+import dev.shushant.sun_and_storm_kmp.di.initKoin
 import moe.tlaster.precompose.PreComposeWindow
 import java.awt.Dimension
 import java.awt.Toolkit
+import java.net.InetAddress
+
+private val koin = initKoin(enableNetworkLogs = true).koin
 
 fun main() = application {
+    println(InetAddress.getLocalHost())
+    val configuration = Toolkit.getDefaultToolkit().screenSize
     PreComposeWindow(
         onCloseRequest = ::exitApplication,
         title = "SunAndStorm-KMP",
@@ -20,7 +26,9 @@ fun main() = application {
             size = getPreferredWindowSize(1000, 1000)
         ),
     ) {
-        AppViewDesktop()
+        AppViewDesktop(
+            deviceConfiguration = configuration
+        )
     }
 }
 

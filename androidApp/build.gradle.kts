@@ -13,6 +13,8 @@ kotlin {
                 implementation(libs.android.compat)
                 implementation(libs.activity.compose)
                 implementation(libs.image.loader1)
+                implementation(libs.koin.android)
+                implementation(libs.androidx.core.splashscreen)
             }
         }
     }
