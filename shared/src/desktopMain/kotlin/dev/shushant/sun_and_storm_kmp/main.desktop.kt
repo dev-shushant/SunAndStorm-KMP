@@ -8,10 +8,13 @@ import com.seiko.imageloader.cache.memory.maxSizePercent
 import com.seiko.imageloader.component.setupDefaultComponents
 import com.seiko.imageloader.util.DebugLogger
 import com.seiko.imageloader.util.LogPriority
+import dev.shushant.sun_and_storm_kmp.designsystem.dimens.DeviceConfiguration
+import java.awt.Dimension
 
 
 @Composable
-fun AppViewDesktop() {
+fun AppViewDesktop(deviceConfiguration: Dimension) {
+
     PlatformState.value = Platform.DESKTOP
     CompositionLocalProvider(
         LocalImageLoader provides ImageLoader {
@@ -26,6 +29,9 @@ fun AppViewDesktop() {
             }
         },
     ) {
-        SunAndStormApp(false)
+        SunAndStormApp(false, deviceConfiguration = DeviceConfiguration(
+            screenWidthDp = deviceConfiguration.width,
+            screenHeight = deviceConfiguration.height
+        ))
     }
 }

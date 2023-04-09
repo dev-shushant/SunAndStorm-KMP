@@ -68,6 +68,10 @@ kotlin {
                 implementation(compose.materialIconsExtended)
                 implementation(libs.kotlinx.serialization.json)
                 api(libs.precompose.moe)
+                api(libs.koin.core)
+                implementation(libs.kermit)
+                implementation(libs.multiplatform.settings)
+                implementation(libs.multiplatform.settings.coroutines)
             }
         }
 
@@ -75,9 +79,16 @@ kotlin {
             dependencies {
                 implementation(libs.material)
                 implementation(libs.accompanist.systemcontroller)
+                implementation(libs.play.services.location)
+                implementation(libs.androidx.startup.runtime)
+                implementation(libs.androidx.core.splashscreen)
             }
         }
-        val iosMain by getting
+        val iosMain by getting{
+            dependencies {
+                implementation(libs.atomicfu)
+            }
+        }
         val iosTest by getting
         val iosSimulatorArm64Main by getting {
             dependsOn(iosMain)
