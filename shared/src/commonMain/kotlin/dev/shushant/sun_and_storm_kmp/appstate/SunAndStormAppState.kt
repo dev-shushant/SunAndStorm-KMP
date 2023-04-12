@@ -19,6 +19,7 @@ import moe.tlaster.precompose.navigation.rememberNavigator
 internal fun rememberSunAndStormAppState(
     navigator: Navigator = rememberNavigator(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
+
 ): SunAndStormAppState {
     return remember(coroutineScope, navigator) {
         SunAndStormAppState(coroutineScope, navigator)
@@ -28,7 +29,7 @@ internal fun rememberSunAndStormAppState(
 @Stable
 internal class SunAndStormAppState(
     val coroutineScope: CoroutineScope,
-    val navigator: Navigator
+    val navigator: Navigator,
 ) {
 
     val currentDestination: String

@@ -42,6 +42,9 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
+        /*pod("mokoMvvmFlowSwiftUI"){
+            version = "~> 0.16.0"
+        }*/
         extraSpecAttributes["resources"] =
             "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
@@ -82,9 +85,11 @@ kotlin {
                 implementation(libs.play.services.location)
                 implementation(libs.androidx.startup.runtime)
                 implementation(libs.androidx.core.splashscreen)
+                implementation(libs.android.compat)
+                implementation(libs.activity.compose)
             }
         }
-        val iosMain by getting{
+        val iosMain by getting {
             dependencies {
                 implementation(libs.atomicfu)
             }

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2152FB042600AC8F00CF470E /* iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iosApp.swift */; };
 		4B302C1429E147D00067E639 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B302C1329E147D00067E639 /* Images.xcassets */; };
-		4B4DCEA629E08910009BF546 /* LocationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4DCEA529E0890F009BF546 /* LocationUtil.swift */; };
 		4B5EFA5929B255E0000FB3D1 /* AvoidDispose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5EFA5829B255E0000FB3D1 /* AvoidDispose.swift */; };
 		C1FC908188C4E8695729CB06 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE96E47030356CE6AD9794A /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
@@ -19,7 +18,6 @@
 		2152FB032600AC8F00CF470E /* iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosApp.swift; sourceTree = "<group>"; };
 		3D7A606AB0AD7636269BD9D0 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		4B302C1329E147D00067E639 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4B4DCEA529E0890F009BF546 /* LocationUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationUtil.swift; path = "../../../../../Downloads/abc-kmm-location-main/sample/iosApp/iosApp/LocationUtil.swift"; sourceTree = "<group>"; };
 		4B5EFA5829B255E0000FB3D1 /* AvoidDispose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoidDispose.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* SunAndStorm-KMP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SunAndStorm-KMP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,7 +60,6 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				4B4DCEA529E0890F009BF546 /* LocationUtil.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iosApp.swift */,
 				4B5EFA5829B255E0000FB3D1 /* AvoidDispose.swift */,
@@ -210,7 +207,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2152FB042600AC8F00CF470E /* iosApp.swift in Sources */,
-				4B4DCEA629E08910009BF546 /* LocationUtil.swift in Sources */,
 				4B5EFA5929B255E0000FB3D1 /* AvoidDispose.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

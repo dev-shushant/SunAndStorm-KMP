@@ -4,26 +4,27 @@ import dev.shushant.sun_and_storm_kmp.network.WeatherApi
 import dev.shushant.sun_and_storm_kmp.network.WeatherApiImpl
 import dev.shushant.sun_and_storm_kmp.platformModule
 import dev.shushant.sun_and_storm_kmp.pref.AppSettings
-import io.ktor.client.*
-import io.ktor.client.plugins.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.plugins.logging.*
-import io.ktor.serialization.kotlinx.json.*
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.logging.SIMPLE
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
-import io.ktor.client.plugins.logging.Logger
-import io.ktor.client.plugins.observer.ResponseObserver
 import org.koin.dsl.module
 
-fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclaration = {}) =
+fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
     startKoin {
         appDeclaration()
         modules(commonModule(), platformModule())
     }
 
 // called by iOS etc
-fun initKoin() = initKoin(enableNetworkLogs = false) {}
+fun initKoin() = initKoin {}
 
 fun commonModule() = module {
     single { createJson() }

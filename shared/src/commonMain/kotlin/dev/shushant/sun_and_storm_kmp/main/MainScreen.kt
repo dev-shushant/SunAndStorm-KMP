@@ -14,13 +14,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import dev.shushant.sun_and_storm_kmp.SafeArea
 import dev.shushant.sun_and_storm_kmp.appstate.SunAndStormAppState
 import dev.shushant.sun_and_storm_kmp.appstate.rememberSunAndStormAppState
 import dev.shushant.sun_and_storm_kmp.designsystem.SunAndStormTopAppBar
-import dev.shushant.sun_and_storm_kmp.designsystem.dimens.dpBasedOnScreenSize
 import dev.shushant.sun_and_storm_kmp.designsystem.dimens.getDimens
+import dev.shushant.sun_and_storm_kmp.permissions.PermissionsController
 import dev.shushant.sun_and_storm_kmp.screennavigation.Screen
 import dev.shushant.sun_and_storm_kmp.ui.dashboard.DashboardScreen
 import moe.tlaster.precompose.navigation.NavHost
@@ -31,8 +30,8 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 )
 @Composable
 internal fun MainScreen(
-    showNavRail: Boolean,
     modifier: Modifier,
+    permissionController: PermissionsController,
     appState: SunAndStormAppState = rememberSunAndStormAppState(),
 ) {
     Scaffold(containerColor = Color.Transparent,
@@ -59,7 +58,7 @@ internal fun MainScreen(
                     initialRoute = Screen.DashBoardScreen.route,
                 ) {
                     scene(Screen.DashBoardScreen.route) {
-                        DashboardScreen()
+                        DashboardScreen(permissionController)
                     }
                 }
             }

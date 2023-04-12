@@ -10,7 +10,7 @@ import platform.CoreGraphics.CGFloat
 
 internal var boundss: IntSize? = null
 fun MainViewController() = PreComposeApplication("SunAndStorm-KMP") {
-    AppViewiOS(boundss)
+    AppViewIOS(boundss)
 }
 
 fun setSafeArea(

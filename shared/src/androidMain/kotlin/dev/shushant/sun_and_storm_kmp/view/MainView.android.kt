@@ -15,24 +15,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import co.touchlab.kermit.Logger
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.shushant.sun_and_storm_kmp.Platform
 import dev.shushant.sun_and_storm_kmp.PlatformState
 import dev.shushant.sun_and_storm_kmp.SunAndStormApp
 import dev.shushant.sun_and_storm_kmp.designsystem.dimens.DeviceConfiguration
-import dev.shushant.sun_and_storm_kmp.location.SunAndStormLocation
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import dev.shushant.sun_and_storm_kmp.permissions.PermissionsController
 
 @Composable
-fun AppViewAndroid() {
+fun AppViewAndroid(permissionController: PermissionsController) {
     val systemUiController = rememberSystemUiController()
     val useDarkIcons = !isSystemInDarkTheme()
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
     var isOpened by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
+
     PlatformState.value = Platform.ANDROID
     DisposableEffect(systemUiController, useDarkIcons) {
         // Update all of the system bar colors to be transparent, and use
@@ -46,7 +44,7 @@ fun AppViewAndroid() {
             darkIcons = useDarkIcons
         )
 
-        coroutineScope.launch(Dispatchers.Default){
+        /*coroutineScope.launch(Dispatchers.Default){
             SunAndStormLocation
                 .onPermissionUpdated("SingleRequest") { isGranted ->
                     if (!isGranted) {
@@ -69,11 +67,18 @@ fun AppViewAndroid() {
                     print("Single" + data.coordinates.toString())
                     print("Single: " + data.coordinates.toString())
                 }.startLocationUpdating()
-        }
+        }*/
 
         onDispose {}
     }
-    SunAndStormApp(false, deviceConfiguration = DeviceConfiguration(configuration.screenWidthDp,configuration.screenHeightDp))
+    SunAndStormApp(
+        false,
+        deviceConfiguration = DeviceConfiguration(
+            configuration.screenWidthDp,
+            configuration.screenHeightDp
+        ),
+        permissionsController = permissionController
+    )
 }
 
 fun Context.openApplicationSettings() {

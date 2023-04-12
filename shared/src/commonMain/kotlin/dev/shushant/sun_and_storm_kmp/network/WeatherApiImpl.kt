@@ -4,23 +4,16 @@ import co.touchlab.kermit.Logger
 import dev.shushant.sun_and_storm_kmp.data.data.CurrentWeatherResponse
 import dev.shushant.sun_and_storm_kmp.data.data.PlaceSearchResponseItem
 import dev.shushant.sun_and_storm_kmp.data.data.WeeklyWeatherResponse
-import dev.shushant.sun_and_storm_kmp.location.Coordinates
-import dev.shushant.sun_and_storm_kmp.pref.AppSettings
+import dev.shushant.sun_and_storm_kmp.permissions.data.Coordinates
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.plugins.HttpTimeout
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.http.takeFrom
-import io.ktor.serialization.kotlinx.json.json
 import io.ktor.util.date.GMTDate
 import io.ktor.util.date.plus
-import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 import kotlin.time.ExperimentalTime
-
-const val weatherApiKey = "Eh9LzlfTj8Ky9LoTIbzxiG3hP2E14Bb6"
 
 class WeatherApiImpl(private val client: HttpClient) :
     WeatherApi {

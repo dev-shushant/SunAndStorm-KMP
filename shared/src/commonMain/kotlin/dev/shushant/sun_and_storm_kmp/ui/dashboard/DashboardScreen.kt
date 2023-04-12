@@ -21,9 +21,9 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import dev.shushant.sun_and_storm_kmp.CurrentPlatform
 import dev.shushant.sun_and_storm_kmp.data.DashBoardScreenState
 import dev.shushant.sun_and_storm_kmp.designsystem.dimens.getDimens
+import dev.shushant.sun_and_storm_kmp.permissions.PermissionsController
 import io.ktor.util.date.GMTDate
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
@@ -32,11 +32,13 @@ import kotlin.math.roundToInt
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
-internal fun DashboardScreen() {
-    val viewModel = viewModel(DashboardViewModel::class) {
-        DashboardViewModel()
+internal fun DashboardScreen(permissionController: PermissionsController) {
+    val viewModel = viewModel(
+        DashboardViewModel::class,
+        listOf(permissionController)
+    ) {
+        DashboardViewModel(permissionController)
     }
-    viewModel.platform = CurrentPlatform.current.value
 
     val state by viewModel.state.collectAsStateWithLifecycle(DashBoardScreenState.Loading)
 
