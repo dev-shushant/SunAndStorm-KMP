@@ -34,7 +34,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 @Composable
 internal fun MainScreen(
     modifier: Modifier,
-    permissionController: PermissionsController,
+    permissionController: PermissionsController?,
     appState: SunAndStormAppState = rememberSunAndStormAppState(),
 ) {
 

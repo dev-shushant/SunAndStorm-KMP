@@ -21,7 +21,7 @@ import kotlin.math.roundToInt
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 internal fun DashboardScreen(
-    permissionController: PermissionsController,
+    permissionController: PermissionsController?,
 ) {
     val viewModel = viewModel(
         DashboardViewModel::class,

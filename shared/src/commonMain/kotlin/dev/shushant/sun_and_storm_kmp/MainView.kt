@@ -39,9 +39,7 @@ internal fun SunAndStormApp(
                 gradientColors =
                 LocalGradientColors.current
             ) {
-                if (permissionsController != null) {
-                    MainScreen(modifier, permissionsController)
-                }
+                MainScreen(modifier, permissionsController)
             }
         }
     }

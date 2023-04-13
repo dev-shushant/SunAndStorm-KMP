@@ -23,7 +23,7 @@ import moe.tlaster.precompose.viewmodel.ViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class DashboardViewModel(private val permissionsController: PermissionsController) :
+class DashboardViewModel(private val permissionsController: PermissionsController?) :
     ViewModel(),
     KoinComponent {
     private val viewModelScope = CoroutineScope(Dispatchers.Main)
@@ -37,7 +37,7 @@ class DashboardViewModel(private val permissionsController: PermissionsControlle
 
     init {
         viewModelScope.launch {
-            val startState = permissionsController.getPermissionState(Permission.LOCATION)
+            val startState = permissionsController?.getPermissionState(Permission.LOCATION)
             println(startState)
             requestPermission(Permission.LOCATION)
             collectLocationData()
@@ -46,13 +46,13 @@ class DashboardViewModel(private val permissionsController: PermissionsControlle
 
     private suspend fun requestPermission(coarseLocation: Permission) {
         try {
-            permissionsController.providePermission(coarseLocation)
+            permissionsController?.providePermission(coarseLocation)
         } catch (deniedAlwaysException: DeniedAlwaysException) {
             Logger.d { deniedAlwaysException.message ?: "" }
         } catch (deniedException: DeniedException) {
             Logger.d { deniedException.message ?: "" }
         } finally {
-            when (permissionsController.getPermissionState(coarseLocation)) {
+            when (permissionsController?.getPermissionState(coarseLocation)) {
                 PermissionState.Denied, PermissionState.DeniedAlways -> permissionsController.openAppSettings()
                 else -> {}
             }
