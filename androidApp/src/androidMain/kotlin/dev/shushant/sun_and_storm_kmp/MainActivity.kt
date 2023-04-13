@@ -28,4 +28,5 @@ class MainActivity : PreComposeActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         permissionsController.onDataReceived(requestCode, permissions, grantResults)
     }
+
 }

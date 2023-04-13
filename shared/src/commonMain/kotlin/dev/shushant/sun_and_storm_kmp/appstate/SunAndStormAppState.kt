@@ -3,11 +3,9 @@ package dev.shushant.sun_and_storm_kmp.appstate
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import dev.shushant.sun_and_storm_kmp.screennavigation.Screen
 import dev.shushant.sun_and_storm_kmp.screennavigation.TopLevelDestination
 import kotlinx.coroutines.CoroutineScope
 import moe.tlaster.precompose.navigation.NavOptions
@@ -20,7 +18,7 @@ internal fun rememberSunAndStormAppState(
     navigator: Navigator = rememberNavigator(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
 
-): SunAndStormAppState {
+    ): SunAndStormAppState {
     return remember(coroutineScope, navigator) {
         SunAndStormAppState(coroutineScope, navigator)
     }
@@ -43,9 +41,6 @@ internal class SunAndStormAppState(
             TopLevelDestination.INTERESTS.name -> TopLevelDestination.INTERESTS
             else -> null
         }
-
-    var shouldShowSettingsDialog by mutableStateOf(false)
-        private set
 
 
     /**
@@ -91,12 +86,8 @@ internal class SunAndStormAppState(
         navigator.navigate(route, navOptions)
     }
 
-    fun setShowSettingsDialog(shouldShow: Boolean) {
-        shouldShowSettingsDialog = shouldShow
-    }
-
     @Composable
-    fun isTopLevelDestinationInHierarchy(destination: TopLevelDestination): Boolean {
-        return currentDestination == destination.name
+    fun isTopLevel(): Boolean {
+        return currentDestination == Screen.DashBoardScreen.route
     }
 }

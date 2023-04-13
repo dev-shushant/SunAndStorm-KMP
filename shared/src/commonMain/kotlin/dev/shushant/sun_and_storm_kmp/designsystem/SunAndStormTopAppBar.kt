@@ -1,11 +1,10 @@
 package dev.shushant.sun_and_storm_kmp.designsystem
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.interaction.InteractionSource
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FormatListBulleted
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -28,9 +27,12 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 @Composable
 internal fun SunAndStormTopAppBar(
     titleRes: String,
-    modifier: Modifier = Modifier,
+    isTopLevel: Boolean,
     colors: TopAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
-    onActionClick: () -> Unit = {},
+    modifier: Modifier = Modifier,
+    onSearch: () -> Unit = {},
+    onAllLocation: () -> Unit = {},
+    onNavigation: () -> Unit = {},
 ) {
     CenterAlignedTopAppBar(
         title = {
@@ -47,31 +49,47 @@ internal fun SunAndStormTopAppBar(
             )
         },
         actions = {
-            IconButton(
-                onActionClick,
-                modifier = Modifier.background(shape = CircleShape, brush = gradient)
-                    .padding(2.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Search,
-                    contentDescription = null,
-                    tint = Color.White
-                )
+            if (isTopLevel) {
+                IconButton(
+                    onSearch,
+                    modifier = Modifier.background(shape = CircleShape, brush = gradient)
+                        .padding(2.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                }
             }
         },
         colors = colors,
         modifier = modifier.testTag("sunAndStormTopAppBar").padding(horizontal = 10.dp),
         navigationIcon = {
-            IconButton(
-                onActionClick,
-                modifier = Modifier.background(shape = CircleShape, brush = gradient)
-                    .padding(2.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.FormatListBulleted,
-                    contentDescription = null,
-                    tint = Color.White
-                )
+            if (isTopLevel) {
+                IconButton(
+                    onAllLocation,
+                    modifier = Modifier.background(shape = CircleShape, brush = gradient)
+                        .padding(2.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.FormatListBulleted,
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                }
+            } else {
+                IconButton(
+                    onNavigation,
+                    modifier = Modifier.background(shape = CircleShape, brush = gradient)
+                        .padding(2.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                }
             }
         }
     )

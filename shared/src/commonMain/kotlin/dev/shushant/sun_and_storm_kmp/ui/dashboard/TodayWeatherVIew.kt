@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,10 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -26,34 +21,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.shushant.sun_and_storm_kmp.data.data.getIcon
-import dev.shushant.sun_and_storm_kmp.designsystem.CardFace
-import dev.shushant.sun_and_storm_kmp.designsystem.FlipCard
-import dev.shushant.sun_and_storm_kmp.designsystem.dimens.dpBasedOnScreenSize
 import dev.shushant.sun_and_storm_kmp.designsystem.dimens.getDimens
 import dev.shushant.sun_and_storm_kmp.util.textBrush
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-
-@Composable
-internal fun TodayWeatherView(content: @Composable () -> Unit = {}) {
-    var cardFace by remember {
-        mutableStateOf(CardFace.Front)
-    }
-
-    FlipCard(
-        cardFace = cardFace,
-        onClick = { cardFace = cardFace.next },
-        modifier = Modifier
-            .fillMaxWidth(.5f)
-            .aspectRatio(1f),
-        front = {
-            content()
-        },
-        back = {
-            content()
-        },
-    )
-}
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable

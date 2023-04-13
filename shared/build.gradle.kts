@@ -75,6 +75,7 @@ kotlin {
                 implementation(libs.kermit)
                 implementation(libs.multiplatform.settings)
                 implementation(libs.multiplatform.settings.coroutines)
+                implementation(libs.kotlinx.datetime)
             }
         }
 
@@ -117,6 +118,7 @@ kotlin {
                 implementation(libs.ktor.client.json)
                 implementation(compose.web.core)
                 implementation(compose.runtime)
+                implementation(npm("@js-joda/timezone", "2.3.0"))
             }
         }
 

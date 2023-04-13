@@ -34,21 +34,19 @@ class PermissionsControllerImpl(
         }
     }
 
-    private fun processResult(permission: Permission) {
-        when (permission) {
-            Permission.CAMERA -> LocationPermissionManager(applicationContext)
-            Permission.GALLERY -> LocationPermissionManager(applicationContext)
-            Permission.STORAGE -> LocationPermissionManager(applicationContext)
-            Permission.WRITE_STORAGE -> LocationPermissionManager(applicationContext)
-            Permission.LOCATION -> LocationPermissionManager(applicationContext)
-            Permission.COARSE_LOCATION -> LocationPermissionManager(applicationContext)
-            Permission.BLUETOOTH_LE -> LocationPermissionManager(applicationContext)
-            Permission.REMOTE_NOTIFICATION -> LocationPermissionManager(applicationContext)
-            Permission.RECORD_AUDIO -> LocationPermissionManager(applicationContext)
-            Permission.BLUETOOTH_SCAN -> LocationPermissionManager(applicationContext)
-            Permission.BLUETOOTH_ADVERTISE -> LocationPermissionManager(applicationContext)
-            Permission.BLUETOOTH_CONNECT -> LocationPermissionManager(applicationContext)
-        }
+    private fun processResult(permission: Permission) = when (permission) {
+        Permission.CAMERA -> LocationPermissionManager(applicationContext)
+        Permission.GALLERY -> LocationPermissionManager(applicationContext)
+        Permission.STORAGE -> LocationPermissionManager(applicationContext)
+        Permission.WRITE_STORAGE -> LocationPermissionManager(applicationContext)
+        Permission.LOCATION -> LocationPermissionManager(applicationContext)
+        Permission.COARSE_LOCATION -> LocationPermissionManager(applicationContext)
+        Permission.BLUETOOTH_LE -> LocationPermissionManager(applicationContext)
+        Permission.REMOTE_NOTIFICATION -> LocationPermissionManager(applicationContext)
+        Permission.RECORD_AUDIO -> LocationPermissionManager(applicationContext)
+        Permission.BLUETOOTH_SCAN -> LocationPermissionManager(applicationContext)
+        Permission.BLUETOOTH_ADVERTISE -> LocationPermissionManager(applicationContext)
+        Permission.BLUETOOTH_CONNECT -> LocationPermissionManager(applicationContext)
     }
 
     override suspend fun isPermissionGranted(permission: Permission): Boolean {
@@ -98,6 +96,7 @@ class PermissionsControllerImpl(
     ) {
         permissionResolver.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
+
 
     private fun Permission.toPlatformPermission(): List<String> {
         return when (this) {

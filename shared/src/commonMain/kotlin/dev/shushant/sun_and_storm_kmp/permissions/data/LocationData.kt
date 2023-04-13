@@ -27,6 +27,6 @@ data class Address(
 
 @Serializable
 data class Coordinates(
-    val latitude: Double = 28.459497,
-    val longitude: Double = 77.026634,
+    val latitude: Double = 8.459497,
+    val longitude: Double = 7.026634,
 )

@@ -1,11 +1,12 @@
 package dev.shushant.sun_and_storm_kmp.ui.dashboard
 
 import co.touchlab.kermit.Logger
-import dev.shushant.sun_and_storm_kmp.data.DashBoardScreenState
+import dev.shushant.sun_and_storm_kmp.data.data.WeeklyWeatherResponse
 import dev.shushant.sun_and_storm_kmp.network.WeatherApi
 import dev.shushant.sun_and_storm_kmp.permissions.DeniedAlwaysException
 import dev.shushant.sun_and_storm_kmp.permissions.DeniedException
 import dev.shushant.sun_and_storm_kmp.permissions.Permission
+import dev.shushant.sun_and_storm_kmp.permissions.PermissionState
 import dev.shushant.sun_and_storm_kmp.permissions.PermissionsController
 import dev.shushant.sun_and_storm_kmp.permissions.data.Coordinates
 import dev.shushant.sun_and_storm_kmp.permissions.data.LocationData
@@ -16,6 +17,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import moe.tlaster.precompose.viewmodel.ViewModel
 import org.koin.core.component.KoinComponent
@@ -31,6 +33,7 @@ class DashboardViewModel(private val permissionsController: PermissionsControlle
     private val locationData = appSettings.locationData
 
     val state = MutableStateFlow<DashBoardScreenState>(DashBoardScreenState.Loading)
+    val weeklyResponse = MutableStateFlow<WeeklyWeatherResponse?>(null)
 
     init {
         viewModelScope.launch {
@@ -41,17 +44,17 @@ class DashboardViewModel(private val permissionsController: PermissionsControlle
         }
     }
 
-    private fun requestPermission(coarseLocation: Permission) {
-        viewModelScope.launch {
-            try {
-                permissionsController.providePermission(coarseLocation)
-            } catch (deniedAlwaysException: DeniedAlwaysException) {
-                Logger.d { deniedAlwaysException.message ?: "" }
-            } catch (deniedException: DeniedException) {
-                Logger.d { deniedException.message ?: "" }
-            } finally {
-                permissionsController.getPermissionState(coarseLocation)
-                    .also { println("post provide $it") }
+    private suspend fun requestPermission(coarseLocation: Permission) {
+        try {
+            permissionsController.providePermission(coarseLocation)
+        } catch (deniedAlwaysException: DeniedAlwaysException) {
+            Logger.d { deniedAlwaysException.message ?: "" }
+        } catch (deniedException: DeniedException) {
+            Logger.d { deniedException.message ?: "" }
+        } finally {
+            when (permissionsController.getPermissionState(coarseLocation)) {
+                PermissionState.Denied, PermissionState.DeniedAlways -> permissionsController.openAppSettings()
+                else -> {}
             }
         }
     }
@@ -78,21 +81,38 @@ class DashboardViewModel(private val permissionsController: PermissionsControlle
         }
     }
 
+    private suspend fun getWeeklyForecast(coordinates: Coordinates) {
+        viewModelScope.launch(Dispatchers.Main) {
+            kotlin.runCatching {
+                val response = weatherApi.getWeeklyWeatherDetails(coordinates)
+                weeklyResponse.update { response }
+            }.getOrElse {
+                state.emit(DashBoardScreenState.Error(it.cause?.message ?: "_ _"))
+            }
+        }
+    }
+
     private suspend fun collectLocationData() {
         locationData.collectLatest {
-            collectWeatherData(it)
+            it?.let {
+                collectWeatherData(it)
+            }
         }
     }
 
     private suspend fun getWeather(locationData: Coordinates) {
         appSettings.weatherData.first()?.let {
-            appSettings.updateWeatherData(it)
+            appSettings.updateWeatherData(it).also {
+                getWeeklyForecast(locationData)
+            }
             return
         }
         viewModelScope.launch(Dispatchers.Main) {
             kotlin.runCatching {
                 val response = weatherApi.getWeatherInfo(locationData)
-                appSettings.updateWeatherData(response)
+                appSettings.updateWeatherData(response).also {
+                    getWeeklyForecast(locationData)
+                }
             }.getOrElse {
                 state.emit(DashBoardScreenState.Error(it.cause?.message ?: "_ _"))
             }

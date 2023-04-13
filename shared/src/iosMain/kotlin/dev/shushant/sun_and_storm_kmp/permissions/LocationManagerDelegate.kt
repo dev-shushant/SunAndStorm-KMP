@@ -1,5 +1,6 @@
 package dev.shushant.sun_and_storm_kmp.permissions
 
+import co.touchlab.kermit.Logger
 import dev.shushant.sun_and_storm_kmp.permissions.data.Address
 import dev.shushant.sun_and_storm_kmp.permissions.data.Coordinates
 import dev.shushant.sun_and_storm_kmp.permissions.data.LocationData
@@ -12,6 +13,8 @@ import platform.CoreLocation.CLLocation
 import platform.CoreLocation.CLLocationManager
 import platform.CoreLocation.CLLocationManagerDelegateProtocol
 import platform.CoreLocation.CLPlacemark
+import platform.CoreLocation.kCLLocationAccuracyBest
+import platform.Foundation.NSError
 import platform.darwin.NSObject
 
 internal class LocationManagerDelegate(val appSettings: AppSettings) : NSObject(),
@@ -19,7 +22,9 @@ internal class LocationManagerDelegate(val appSettings: AppSettings) : NSObject(
     private var callback: ((CLAuthorizationStatus) -> Unit)? = null
 
 
-    private val locationManager = CLLocationManager()
+    private val locationManager = CLLocationManager().apply {
+        desiredAccuracy = kCLLocationAccuracyBest
+    }
 
     init {
         locationManager.delegate = this
@@ -44,11 +49,11 @@ internal class LocationManagerDelegate(val appSettings: AppSettings) : NSObject(
     }
 
     override fun locationManager(manager: CLLocationManager, didUpdateLocations: List<*>) =
-        notify(didUpdateLocations.last() as? CLLocation, manager.heading)
+        notify(didUpdateLocations.first() as? CLLocation, manager.heading)
 
-    override fun locationManager(manager: CLLocationManager, didUpdateHeading: CLHeading) =
-        notify(manager.location, didUpdateHeading)
-
+    override fun locationManager(manager: CLLocationManager, didFailWithError: NSError) {
+        Logger.d { didFailWithError.localizedDescription }
+    }
 
     private fun notify(lastLocation: CLLocation?, lastHeading: CLHeading?) {
         val location = lastLocation ?: return
@@ -102,7 +107,7 @@ internal class LocationManagerDelegate(val appSettings: AppSettings) : NSObject(
         if (!locationManager.locationServicesEnabled) {
             return
         }
-        locationManager.startUpdatingHeading()
+        //locationManager.startUpdatingHeading()
         locationManager.startUpdatingLocation()
     }
 }

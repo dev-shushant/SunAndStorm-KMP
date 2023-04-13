@@ -2,6 +2,7 @@ package dev.shushant.sun_and_storm_kmp.designsystem.dimens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import dev.shushant.sun_and_storm_kmp.CurrentPlatform
@@ -88,3 +89,7 @@ internal val Float.getDimens
             Dimensions.sw600 -> this.toHdpi()
             Dimensions.sw720 -> this.toXhdpi()
         }
+
+
+internal val Int.getColor
+    @Composable get() = Color(0XFFFFD439)
