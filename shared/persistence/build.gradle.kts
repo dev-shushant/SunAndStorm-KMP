@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
-    id("org.jetbrains.compose")
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -31,24 +31,26 @@ kotlin {
     }
 
     cocoapods {
-        summary = "Shared code for SunAndStorm-KMP"
-        homepage = "https://github.com/ShushantTiwari-ashu/SunAndStorm-KMP"
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "permissionframework"
+            baseName = "persistence"
         }
     }
-
+    
     sourceSets {
-        val commonMain by getting {
+        val commonMain by getting{
             dependencies {
                 implementation(libs.multiplatform.settings)
                 implementation(libs.multiplatform.settings.coroutines)
                 implementation(libs.kermit)
                 api(libs.koin.core)
-                implementation(compose.runtime)
+                implementation(libs.kotlinx.coroutines.core)
                 api(project(":shared:models"))
+                api(project(":shared:persistence"))
+                implementation(libs.kotlinx.serialization.json)
             }
         }
         val commonTest by getting {
@@ -84,7 +86,7 @@ kotlin {
 }
 
 android {
-    namespace = "dev.shushant.permissionframework"
+    namespace = "dev.shushant.persistence"
     compileSdk = 33
     defaultConfig {
         minSdk = 24

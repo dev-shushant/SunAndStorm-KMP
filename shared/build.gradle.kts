@@ -42,9 +42,7 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
-        /*pod("mokoMvvmFlowSwiftUI"){
-            version = "~> 0.16.0"
-        }*/
+
         extraSpecAttributes["resources"] =
             "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
@@ -61,6 +59,7 @@ kotlin {
                 implementation(libs.ktor.content.negotiation)
                 implementation(compose.runtime)
                 api(compose.foundation)
+                api(project(":shared:persistence"))
                 api(compose.animation)
                 implementation(compose.material)
                 implementation(compose.material3)
@@ -69,7 +68,6 @@ kotlin {
                 api(libs.imageloader)
                 implementation(compose.ui)
                 implementation(compose.materialIconsExtended)
-                implementation(libs.kotlinx.serialization.json)
                 api(libs.precompose.moe)
                 api(libs.koin.core)
                 implementation(libs.kermit)
