@@ -1,10 +1,23 @@
 # SunAndStorm-KMP
+SunAndStorm-KMP is a Kotlin Multiplatform (KMP) project that aims to provide a unified codebase for handling weather-related functionality, such as fetching weather data, across multiple platforms. It allows developers to write shared code that can be used on Android, iOS, and other platforms, reducing duplication and improving development efficiency.
 
-This is an exploration app for Compose Multiplatform UI.
-For more details on Compose Multiplatform UI visit: https://github.com/JetBrains/compose-jb/
-The support for iOS on Compose Multiplatform is still in experimental phase.
+This sample demonstrates how to use the location API in Kotlin Multiplatform to get the device's current location.
 
-This is just a demonstration, the code is still not in perfect form.
+
+## Features
+
+- Weather data fetching: Fetch weather data from various weather APIs.
+- Shared code: Write once, use on multiple platforms (Android, iOS, etc.).
+- Unified architecture: Follows a clean and scalable architecture pattern for better code organization.
+- Sample app: A sample Android app that demonstrates how to use the shared code across platforms.
+
+## Getting Started
+
+To get started with SunAndStorm-KMP, you'll need the following prerequisites:
+
+- Android Studio or IntelliJ IDEA with Kotlin plugin installed.
+- Xcode with Swift support (for iOS development).
+- Android SDK and Android NDK (for Android development).
 
 <table>
 <tr>
